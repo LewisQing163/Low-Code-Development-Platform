@@ -10,9 +10,25 @@ namespace LowCodeDevelopmentPlatform.Entities
     public class Menu: BasicAggregateRoot<Guid>
     {
         /// <summary>
+        /// 父类id
+        /// </summary>
+        public Guid SupId { get; set; }
+        /// <summary>
+        /// 菜单链接
+        /// </summary>
+        public string Url { get; set; }
+        /// <summary>
+        /// 菜单图标
+        /// </summary>
+        public string Icon { get; set; }
+        /// <summary>
+        /// 打开目标（原窗口，新窗口或iframe等）
+        /// </summary>
+        public string Target { get; set; }
+        /// <summary>
         /// 菜单名
         /// </summary>
-        public int Name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// 状态
         /// </summary>
@@ -20,7 +36,7 @@ namespace LowCodeDevelopmentPlatform.Entities
         /// <summary>
         /// 创建时间
         /// </summary>
-        public int CreateTime { get; set; }
+        public System.DateTime CreateTime { get; set; }
         /// <summary>
         /// 创建人id
         /// </summary>

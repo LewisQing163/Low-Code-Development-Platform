@@ -12,7 +12,7 @@ namespace LowCodeDevelopmentPlatform.Entities
         /// <summary>
         /// 角色名称
         /// </summary>
-        public int Name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// 状态
         /// </summary>
@@ -20,7 +20,7 @@ namespace LowCodeDevelopmentPlatform.Entities
         /// <summary>
         /// 创建时间
         /// </summary>
-        public int Createtime { get; set; }
+        public System.DateTime Createtime { get; set; }
         /// <summary>
         /// 创建人id
         /// </summary>

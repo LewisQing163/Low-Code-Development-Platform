@@ -119,8 +119,8 @@ namespace LowCodeDevelopmentPlatform
                 options.ConventionalControllers.Create(typeof(LowCodeDevelopmentPlatformApplicationModule).Assembly);
             });
         }
-
-        private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
+            
+        private static void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
         {
             //添加jwt验证：
             context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -142,12 +142,12 @@ namespace LowCodeDevelopmentPlatform
 
         private static void ConfigureSwaggerServices(ServiceConfigurationContext context, IConfiguration configuration)
         {
-            context.Services.AddAbpSwaggerGenWithOAuth(
-                configuration["AuthServer:Authority"],
-                new Dictionary<string, string>
-                {
-                    {"LowCodeDevelopmentPlatform", "LowCodeDevelopmentPlatform API"}
-                },
+            context.Services.AddAbpSwaggerGen(
+                //configuration["AuthServer:Authority"],
+                //new Dictionary<string, string>
+                //{
+                //    {"LowCodeDevelopmentPlatform", "LowCodeDevelopmentPlatform API"}
+                //},
                 options =>
                 {
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "LowCodeDevelopmentPlatform API", Version = "v1" });

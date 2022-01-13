@@ -15,6 +15,7 @@ namespace LowCodeDevelopmentPlatform
               * 或者，您可以拆分映射配置
               * 进入多个配置文件类以获得更好的组织。 */
             CreateMap<UserInfo, UserInfoDTO>();
+            CreateMap<UserInfoDTO, UserInfo>();
             CreateMap<CreateUpdateUserInfoDTO,UserInfo>();
         }
     }

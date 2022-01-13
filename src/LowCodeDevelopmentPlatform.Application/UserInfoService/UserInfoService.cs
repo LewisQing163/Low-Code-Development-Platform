@@ -2,6 +2,7 @@
 using LowCodeDevelopmentPlatform.Entities;
 using LowCodeDevelopmentPlatform.Helper;
 using LowCodeDevelopmentPlatform.IUserInfoService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -30,12 +31,25 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpPost, Route("AddUserInfo")]
         public async Task<ReturnResult<int>> AddUserInfo(UserInfoDTO userInfo)
-        {
-            var data = ObjectMapper.Map<UserInfoDTO, UserInfo>(userInfo);
-            await _repository.InsertAsync(data);
-            return new ReturnResult<int> { Message = "添加成功", State = State.Success };
+        { 
+            try
+            {
+                userInfo.Password = MD5Helper.MD5Hash(userInfo.Password);
+                var data = ObjectMapper.Map<UserInfoDTO, UserInfo>(userInfo);
+                await _repository.InsertAsync(data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return new ReturnResult<int>
+            {
+                Message = "添加成功",
+                State = State.Success
+            };
         }
         /// <summary>
         /// 删除实现
@@ -43,7 +57,7 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost, Route("DeletetUserInfo")]
-        public async Task<ReturnResult<int>> DeletetUserInfo(int id)
+        public async Task<ReturnResult<int>> DeletetUserInfo(Guid id)
         {
             var list = await _repository.GetListAsync();
             var data = list.Where(d => d.Id.Equals(id)).FirstOrDefault();
@@ -62,12 +76,11 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
         [HttpGet, Route("ListUserinfo")]
         public async Task<IEnumerable<UserInfoDTO>> ListUserinfo(string key)
         {
-            //查出列表所有的数据
-            var list = await _repository.GetListAsync();
-            list = list.Where(p => p.Status == 1).ToList();
+            //查出列表状态是1所有的数据
+            var list = _repository.GetListAsync().Result.Where(x=>x.Status==1).ToList();
             if (!string.IsNullOrEmpty(key))
             {
-                list = list.Where(d => d.Name.Contains(key)&&d.Status==1).ToList();
+                list = list.Where(d => d.Name.Contains(key)).ToList();
             }
             var data = ObjectMapper.Map<List<UserInfo>, List<UserInfoDTO>>(list);
             return data;
@@ -78,16 +91,17 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
-        [HttpGet, Route("Login")]
+        [HttpPost, Route("Login")]
         public async Task<ReturnResult<int>> Login(UserInfoDTO userInfo)
         {
             var list = await _repository.GetListAsync();
-            ObjectMapper.Map<List<UserInfo>, List<UserInfoDTO>>(list);
-            MD5Helper.MD5Hash(userInfo.Password);
-            var data = list.Where(p => p.Name.Equals(userInfo.Name) && p.Password.Equals(userInfo.Password)).FirstOrDefault();
-            if (data != null)
+            var data= ObjectMapper.Map<List<UserInfo>, List<UserInfoDTO>>(list);
+            userInfo.Password= MD5Helper.MD5Hash(userInfo.Password);//对用户密码进行加密
+            var token = CreateToken(userInfo.Name);//根据用户名生成token
+            var u = data.Where(p => p.Account.Equals(userInfo.Account) && p.Password.Equals(userInfo.Password)).FirstOrDefault();
+            if (u != null)
             {
-                return new ReturnResult<int> { Message = "登陆成功", State = State.Success };
+                return new ReturnResult<int> { Message = "登陆成功", State = State.Success,Token=token };
             }
             else
             {

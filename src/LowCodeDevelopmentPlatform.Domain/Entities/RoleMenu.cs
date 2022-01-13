@@ -12,11 +12,11 @@ namespace LowCodeDevelopmentPlatform.Entities
         /// <summary>
         /// 角色id
         /// </summary>
-        public int Rid { get; set; }
+        public Guid Rid { get; set; }
         /// <summary>
         /// 菜单id
         /// </summary>
-        public int Mid { get; set; }
+        public Guid Mid { get; set; }
 
     }
 }

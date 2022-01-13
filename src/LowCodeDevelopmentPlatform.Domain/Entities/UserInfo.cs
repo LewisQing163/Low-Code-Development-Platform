@@ -12,16 +12,16 @@ namespace LowCodeDevelopmentPlatform.Entities
     [Table("UserInfo")]
     public class UserInfo: BasicAggregateRoot<Guid>
     {
-        public UserInfo()
-        {
-            this.Account = string.Empty;
-            this.Password = string.Empty;
-            this.Name = string.Empty;
-            this.Sex = 0;
-            this.Status = 0;
-            this.CreateTime = DateTime.Now;
-            this.CreateId = string.Empty;
-        }
+        //public UserInfo()
+        //{
+        //    this.Account = string.Empty;
+        //    this.Password = string.Empty;
+        //    this.Name = string.Empty;
+        //    this.Sex = 0;
+        //    this.Status = 0;
+        //    this.CreateTime = DateTime.Now;
+        //    this.CreateId = string.Empty;
+        //}
 
         /// <summary>
         /// 用户登录帐号

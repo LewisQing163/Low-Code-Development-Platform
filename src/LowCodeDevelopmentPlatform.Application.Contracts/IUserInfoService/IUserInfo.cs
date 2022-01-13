@@ -26,7 +26,7 @@ namespace LowCodeDevelopmentPlatform.IUserInfoService
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<ReturnResult<int>> DeletetUserInfo(int id);
+        Task<ReturnResult<int>> DeletetUserInfo(Guid id);
         /// <summary>
         /// 修改接口
         /// </summary>

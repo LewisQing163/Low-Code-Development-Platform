@@ -12,10 +12,10 @@ namespace LowCodeDevelopmentPlatform.Entities
         /// <summary>
         /// 用户表id
         /// </summary>
-        public int Uid { get; set; }
+        public Guid Uid { get; set; }
         /// <summary>
         /// 角色表id
         /// </summary>
-        public int Rid { get; set; }
+        public Guid Rid { get; set; }
     }
 }

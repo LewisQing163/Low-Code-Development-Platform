@@ -55,6 +55,10 @@ namespace LowCodeDevelopmentPlatform.EntityFrameworkCore
         #endregion
 
         public DbSet<UserInfo> UserInfos { get; set; }
+        public DbSet<Role> Part { get; set; }
+        public DbSet<RoleMenu> RoleMenus { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
 
         public LowCodeDevelopmentPlatformDbContext(DbContextOptions<LowCodeDevelopmentPlatformDbContext> options)
             : base(options)
@@ -89,6 +93,26 @@ namespace LowCodeDevelopmentPlatform.EntityFrameworkCore
             builder.Entity<UserInfo>(b =>
             {
                 b.ToTable("UserInfo");
+                b.ConfigureByConvention();
+            });
+            builder.Entity<Role>(b =>
+            {
+                b.ToTable("Role");
+                b.ConfigureByConvention();
+            });
+            builder.Entity<RoleMenu>(b =>
+            {
+                b.ToTable("RoleMenu");
+                b.ConfigureByConvention();
+            });
+            builder.Entity<Menu>(b =>
+            {
+                b.ToTable("Menu");
+                b.ConfigureByConvention();
+            });
+            builder.Entity<UserRole>(b =>
+            {
+                b.ToTable("UserRole");
                 b.ConfigureByConvention();
             });
         }
