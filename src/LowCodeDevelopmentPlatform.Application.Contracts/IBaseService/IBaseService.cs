@@ -16,11 +16,17 @@ namespace LowCodeDevelopmentPlatform.IBaseService_
         /// <returns></returns>
         Task<ReturnResult<int>> AddAsync(T model);
         /// <summary>
-        /// 删除
+        /// 逻辑删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        Task<ReturnResult<int>> DeleteAsync(Guid ids);
+        Task<ReturnResult<int>> DeleteAsync(T model);
+        /// <summary>
+        /// 物理删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<ReturnResult<int>> DeleteAsync(string id);
         /// <summary>
         /// 修改
         /// </summary>

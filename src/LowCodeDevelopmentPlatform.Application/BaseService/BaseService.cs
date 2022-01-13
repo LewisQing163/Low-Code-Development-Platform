@@ -1,6 +1,7 @@
 ﻿using LowCodeDevelopmentPlatform.Common;
 using LowCodeDevelopmentPlatform.Entities;
 using LowCodeDevelopmentPlatform.IBaseService_;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace LowCodeDevelopmentPlatform.BaseService
         {
             _repository = repository;
         }
-
+       
+        [HttpPost,Route("AddAsync")]
         /// <summary>
         /// 添加
         /// </summary>
@@ -28,23 +30,32 @@ namespace LowCodeDevelopmentPlatform.BaseService
             await _repository.InsertAsync(model);
             return new ReturnResult<int> { Message = "添加成功" };
         }
+        
+        [HttpPost, Route("DeleteAsync")]
         /// <summary>
-        /// 删除
+        /// 逻辑删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public async Task<ReturnResult<int>> DeleteAsync(Guid ids)
+        public async Task<ReturnResult<int>> DeleteAsync(T model)
         {
-            var list = await _repository.GetListAsync();
-            var data = list.Where(d => d.Id.Equals(ids)).FirstOrDefault();
-            //if (data.Status == 1)
-            //{
-            //    data.Status = 0;
-            //}
-            await _repository.UpdateAsync(data);
+            await _repository.UpdateAsync(model);
             return new ReturnResult<int> { Message = "删除成功", State = State.Success };
         }
-
+        
+        [HttpPost, Route("DeleteAsync2")]
+        /// <summary>
+        /// 物理删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ReturnResult<int>> DeleteAsync(string id)
+        {
+            await _repository.DeleteAsync(x=>x.Id.ToString().Equals(id));
+            return new ReturnResult<int> { Message = "删除成功", State = State.Success };
+        }
+        
+        [HttpGet, Route("SelectAsync")]
         /// <summary>
         /// 带条件列表及分页
         /// </summary>
@@ -57,6 +68,8 @@ namespace LowCodeDevelopmentPlatform.BaseService
             var list = await _repository.GetListAsync();
             return list;
         }
+        
+        [HttpPost, Route("UpdateAsync")]
         /// <summary>
         /// 编辑
         /// </summary>
