@@ -25,6 +25,7 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
         {
             _repository = repository;
         }
+        
         #region CRUD 登录
         /// <summary>
         /// 添加实现
@@ -51,6 +52,7 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
                 State = State.Success
             };
         }
+       
         /// <summary>
         /// 删除实现
         /// </summary>
@@ -68,6 +70,7 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
             await _repository.UpdateAsync(data);
             return new ReturnResult<int> { Message = "删除成功", State = State.Success };
         }
+       
         /// <summary>
         /// 列表实现
         /// </summary>
@@ -108,6 +111,7 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
                 return new ReturnResult<int> { Message = "账号密码错误!", State = State.Fail };
             }
         }
+       
         /// <summary>
         /// 生成token方法
         /// </summary>
@@ -131,6 +135,7 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
             signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        
         /// <summary>
         /// 修改实现
         /// </summary>

@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LowCodeDevelopmentPlatform.Application</name>
+    </assembly>
+    <members>
+        <member name="M:LowCodeDevelopmentPlatform.MenuService.MenuService.AddMenu(LowCodeDevelopmentPlatform.IMenuService_.MenuDTO)">
+            <summary>
+            添加菜单
+            </summary>
+            <param name="menuDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.MenuService.MenuService.DeleteMenu(System.Guid)">
+            <summary>
+            删除菜单
+            </summary>
+            <param name="id">参数用户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.MenuService.MenuService.UpdateMenu(LowCodeDevelopmentPlatform.IMenuService_.MenuDTO)">
+            <summary>
+            修改菜单
+            </summary>
+            <param name="menuDTO">需要修改的数据字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.RoleService.RoleService.AddRole(LowCodeDevelopmentPlatform.IRoleService_.RoleDTO)">
+            <summary>
+            添加角色
+            </summary>
+            <param name="roleDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.RoleService.RoleService.DeletetRole(System.Guid)">
+            <summary>
+            逻辑删除角色
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.RoleService.RoleService.ListRole(System.String)">
+            <summary>
+            角色列表
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.RoleService.RoleService.UpdateRole(LowCodeDevelopmentPlatform.IRoleService_.RoleDTO)">
+            <summary>
+            修改角色
+            </summary>
+            <param name="roleDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.UserInfoService.UserInfoService.AddUserInfo(LowCodeDevelopmentPlatform.IUserInfoService.UserInfoDTO)">
+            <summary>
+            添加实现
+            </summary>
+            <param name="userInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.UserInfoService.UserInfoService.DeletetUserInfo(System.Guid)">
+            <summary>
+            删除实现
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.UserInfoService.UserInfoService.ListUserinfo(System.String)">
+            <summary>
+            列表实现
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.UserInfoService.UserInfoService.Login(LowCodeDevelopmentPlatform.IUserInfoService.UserInfoDTO)">
+            <summary>
+            用户登录实现
+            </summary>
+            <param name="userInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.UserInfoService.UserInfoService.CreateToken(System.String)">
+            <summary>
+            生成token方法
+            </summary>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LowCodeDevelopmentPlatform.UserInfoService.UserInfoService.UpdateUserInfo(LowCodeDevelopmentPlatform.IUserInfoService.UserInfoDTO)">
+            <summary>
+            修改实现
+            </summary>
+            <param name="userInfo"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

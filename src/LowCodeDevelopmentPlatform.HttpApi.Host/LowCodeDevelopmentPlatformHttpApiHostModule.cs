@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Configuration;
@@ -54,7 +52,6 @@ namespace LowCodeDevelopmentPlatform
         {
             var configuration = context.Services.GetConfiguration();
             var hostingEnvironment = context.Services.GetHostingEnvironment();
-
             ConfigureBundles();
             ConfigureUrls(configuration);
             ConfigureConventionalControllers();
@@ -152,6 +149,10 @@ namespace LowCodeDevelopmentPlatform
                 {
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "LowCodeDevelopmentPlatform API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
+                    //为 Swagger JSON and UI设置xml文档注释路径
+                    var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);//获取应用程序所在目录（绝对，不受工作目录影响，建议采用此方法获取路径）
+                    var xmlPath = Path.Combine(basePath, "LowCodeDevelopmentPlatform.Application.xml");   //  添加 swagger xml 注释  这个xml文件开始是不存在的写上项目名.xml即可
+                    options.IncludeXmlComments(xmlPath);
                     options.CustomSchemaIds(type => type.FullName);
 
                     #region swagger 用 Jwt验证
@@ -255,7 +256,6 @@ namespace LowCodeDevelopmentPlatform
             app.UseAbpSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "LowCodeDevelopmentPlatform API");
-
                 var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
                 c.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
                 c.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);

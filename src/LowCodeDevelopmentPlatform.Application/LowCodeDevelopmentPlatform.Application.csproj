@@ -7,6 +7,12 @@
     <RootNamespace>LowCodeDevelopmentPlatform</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DocumentationFile>D:\低代码开发平台项目\LowCodeDevelopmentPlatform\aspnet-core\src\LowCodeDevelopmentPlatform.Application\LowCodeDevelopmentPlatform.Application.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\LowCodeDevelopmentPlatform.Domain\LowCodeDevelopmentPlatform.Domain.csproj" />
     <ProjectReference Include="..\LowCodeDevelopmentPlatform.Application.Contracts\LowCodeDevelopmentPlatform.Application.Contracts.csproj" />

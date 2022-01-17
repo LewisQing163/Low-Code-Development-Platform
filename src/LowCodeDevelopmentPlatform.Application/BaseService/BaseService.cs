@@ -11,7 +11,7 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 namespace LowCodeDevelopmentPlatform.BaseService
 {
-    public class BaseService<T> : ApplicationService, IBaseService<T> where T :class,  Volo.Abp.Domain.Entities.IEntity<Guid>,new()
+    public class BaseService<T> : ApplicationService,IBaseService<T> where T :class, Volo.Abp.Domain.Entities.IEntity<Guid>, new()
     {
         public readonly IRepository<T> _repository;
         public BaseService(IRepository<T> repository) 
@@ -83,11 +83,11 @@ namespace LowCodeDevelopmentPlatform.BaseService
         }
     }
 
-    public class MenuService : BaseService<Menu>
-    {
-        public MenuService(IRepository<Menu> repository) : base(repository)
-        {
+    //public class MenuService : BaseService<Menu>
+    //{
+    //    public MenuService(IRepository<Menu> repository) : base(repository)
+    //    {
 
-        }
-    }
+    //    }
+    //}
 }
