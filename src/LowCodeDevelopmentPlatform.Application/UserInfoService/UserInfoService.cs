@@ -32,7 +32,7 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
-        [Authorize]
+        //[Authorize]
         [HttpPost, Route("AddUserInfo")]
         public async Task<ReturnResult<int>> AddUserInfo(UserInfoDTO userInfo)
         { 
@@ -52,7 +52,7 @@ namespace LowCodeDevelopmentPlatform.UserInfoService
                 State = State.Success
             };
         }
-       
+        
         /// <summary>
         /// 删除实现
         /// </summary>

@@ -33,6 +33,6 @@ namespace LowCodeDevelopmentPlatform.IMenuService_
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        Task<IEnumerable<MenuDTO>> ListMenu();
+        //Task<List<MenuDTO>> ListMenu();
     }
 }
