@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>LowCodeDevelopmentPlatform</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DocumentationFile>D:\低代码开发平台项目\LowCodeDevelopmentPlatform\aspnet-core\src\LowCodeDevelopmentPlatform.Application\LowCodeDevelopmentPlatform.Application.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LowCodeDevelopmentPlatform.Domain\LowCodeDevelopmentPlatform.Domain.csproj" />
+    <ProjectReference Include="..\LowCodeDevelopmentPlatform.Application.Contracts\LowCodeDevelopmentPlatform.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Application" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="5.0.1" />
+  </ItemGroup>
+
+</Project>
