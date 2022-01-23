@@ -17,6 +17,8 @@ namespace LowCodeDevelopmentPlatform.Common
         /// <summary>
         /// token
         /// </summary>
+        /// 
+
         public string Token { get; set; }
 
     }
