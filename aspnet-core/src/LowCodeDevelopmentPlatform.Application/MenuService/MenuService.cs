@@ -75,60 +75,43 @@ namespace LowCodeDevelopmentPlatform.MenuService
             return result;
         }
 
-        //public async Task<List<MenuDTO>> ListMenu()
+        public async Task<List<MenuDTO>> ListMenu()
+        {
+            //查出列表状态是1所有的数据
+            //var list = Repository.GetListAsync().Result.Where(x => x.Status == 1).ToList();
+            //if (!string.IsNullOrEmpty(key))
+            //{
+            //    list = list.Where(d => d.Name.Contains(key)).ToList();
+            //}
+            //var data = ObjectMapper.Map<List<Menu>, List<MenuDTO>>(list);
+            //var list = await Task.Run(() => GetMneu(""));
+            var list = GetMneu("0");
+            return list;
+        }
+        //public async Task<List<MenuDTO>>  ListMenuAs()
         //{
-        //    //查出列表状态是1所有的数据
-        //    //var list = Repository.GetListAsync().Result.Where(x => x.Status == 1).ToList();
-        //    //if (!string.IsNullOrEmpty(key))
-        //    //{
-        //    //    list = list.Where(d => d.Name.Contains(key)).ToList();
-        //    //}
-        //    //var data = ObjectMapper.Map<List<Menu>, List<MenuDTO>>(list);
-        //    //var list = await Task.Run(() => GetMneu(""));
         //    var list = ListMenu("0");
-        //    return list;
+        //    return await list;
         //}
-        public async Task<List<MenuDTO>>  ListMenuAs()
+        
+        private List<MenuDTO> GetMneu(string id)
         {
-            var list = ListMenu("0");
-            return await list;
-        }
-        private async Task<List<MenuDTO>> ListMenu(string Id)
-        {
-            List<MenuDTO> listmenu = new List<MenuDTO>();
-            var listdata =await Repository.GetListAsync();
-            listdata.Where(x => x.SupId.ToString() == Id).ToList();
-            listdata.ForEach(async x =>
-            {
-                listmenu.Add(new MenuDTO
-                {
-                    Id = x.Id,
-                    Children =await ListMenu(x.Id.ToString()),
-                    Name = x.Name,
-                    SupId = x.SupId,
-                    Url = x.Url,
-                });
-            });
-            return listmenu;
-        }
-        //private List<MenuDTO> GetMneu(string id)
-        //{
-        //    var list = Repository.GetListAsync().Result;
+            var list = Repository.GetListAsync().Result;
 
-        //    var newList = list.Where(p => p.SupId == new Guid(id)).ToList();
+            var newList = list.Where(p => p.SupId == new Guid(id)).ToList();
 
-        //    List<MenuDTO> treeMenuList = new();
-        //    newList.ForEach(p =>
-        //   {
-        //       MenuDTO treeMenu = new();
-        //       treeMenu.Id = p.Id;
-        //       treeMenu.Name = p.Name;
-        //       treeMenu.Url = p.Url;
-        //       treeMenuList.Add(treeMenu);
-        //       treeMenu.Children = GetMneu(p.Id.ToString());
-        //   });
-        //    return treeMenuList;
-        //}
+            List<MenuDTO> treeMenuList = new();
+            newList.ForEach(p =>
+           {
+               MenuDTO treeMenu = new();
+               treeMenu.Id = p.Id;
+               treeMenu.Name = p.Name;
+               treeMenu.Url = p.Url;
+               treeMenuList.Add(treeMenu);
+               treeMenu.Children = GetMneu(p.Id.ToString());
+           });
+            return treeMenuList;
+        }
         /// <summary>
         /// 修改菜单
         /// </summary>
