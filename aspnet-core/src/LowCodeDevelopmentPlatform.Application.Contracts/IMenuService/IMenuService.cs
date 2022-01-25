@@ -1,8 +1,5 @@
 ﻿using LowCodeDevelopmentPlatform.Common;
-using LowCodeDevelopmentPlatform.IBaseService_;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
@@ -15,7 +12,7 @@ namespace LowCodeDevelopmentPlatform.IMenuService_
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
-        Task<ReturnResult<int>> AddMenu(MenuDTO menuDTO);
+        Task<ServiceResult<int>> AddMenu(MenuDTO menuDTO);
         /// <summary>
         /// 删除接口
         /// </summary>

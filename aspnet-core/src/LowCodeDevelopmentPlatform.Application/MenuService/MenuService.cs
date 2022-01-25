@@ -1,13 +1,9 @@
-﻿using AutoMapper;
-using LowCodeDevelopmentPlatform.BaseService;
-using LowCodeDevelopmentPlatform.Common;
+﻿using LowCodeDevelopmentPlatform.Common;
 using LowCodeDevelopmentPlatform.Entities;
 using LowCodeDevelopmentPlatform.IMenuService_;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -26,23 +22,26 @@ namespace LowCodeDevelopmentPlatform.MenuService
         /// </summary>
         /// <param name="menuDTO"></param>
         /// <returns></returns>
-        public async Task<ReturnResult<int>> AddMenu(MenuDTO menuDTO)
+        public async Task<ServiceResult<int>> AddMenu(MenuDTO menuDTO)
         {
-            var result = new ReturnResult<int>
-            {
-                Message = "添加成功",
-                State = State.Success
-            };
+            ServiceResult<int> result = new();
             try
             {
+                var name = await Repository.FirstOrDefaultAsync(l => l.Name == menuDTO.Name);
+                if (name!=null)
+                {
+                    result.IsFailed("不能重复添加菜单");
+                    return result;
+                }
                 var data = ObjectMapper.Map<MenuDTO, Menu>(menuDTO);
                 await Repository.InsertAsync(data);
             }
             catch (Exception ex)
             {
-                result.Message = "添加失败" + ex.Message;
-                result.State = State.Fail;
+                result.IsFailed(ex);
+                return result;
             }
+            result.IsSuccess("添加成功");
             return result;
         }
         /// <summary>
@@ -75,7 +74,7 @@ namespace LowCodeDevelopmentPlatform.MenuService
             return result;
         }
 
-        public async Task<List<MenuDTO>> ListMenu()
+        public Task<List<MenuDTO>> ListMenu()
         {
             //查出列表状态是1所有的数据
             //var list = Repository.GetListAsync().Result.Where(x => x.Status == 1).ToList();
@@ -86,7 +85,7 @@ namespace LowCodeDevelopmentPlatform.MenuService
             //var data = ObjectMapper.Map<List<Menu>, List<MenuDTO>>(list);
             //var list = await Task.Run(() => GetMneu(""));
             var list = GetMneu("0");
-            return list;
+            return Task.FromResult(list);
         }
         //public async Task<List<MenuDTO>>  ListMenuAs()
         //{
